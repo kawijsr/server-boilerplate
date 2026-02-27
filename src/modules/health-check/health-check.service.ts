@@ -3,16 +3,9 @@ import {
   PingDynamicCommandPost,
 } from './health-check.commands';
 import {Command, Type} from '@kawijsr/server-node';
+import {Service} from '../../commons/service';
 
-class HealthCheckService {
-  private static instance: HealthCheckService;
-
-  static getInstance(): HealthCheckService {
-    if (!HealthCheckService.instance) {
-      HealthCheckService.instance = new HealthCheckService();
-    }
-    return HealthCheckService.instance;
-  }
+class HealthCheckService extends Service {
 
   healthCheck() {
     return {
