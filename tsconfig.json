@@ -26,13 +26,6 @@
     "noUnusedParameters": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "paths": {
-      "@/*": ["./src/*"],
-      "@commons/*": ["./src/commons/*"],
-      "@decorators/*": ["./src/commons/decorators/*"],
-      "@modules/*": ["./src/modules/*"],
-      "@database/*": ["./src/commons/database/*"],
-    }
   },
   "include": [
     "src/**/*"
