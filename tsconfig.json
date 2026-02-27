@@ -11,6 +11,7 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "strictNullChecks": false,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "experimentalDecorators": true,
@@ -23,7 +24,14 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@commons/*": ["./src/commons/*"],
+      "@decorators/*": ["./src/commons/decorators/*"],
+      "@modules/*": ["./src/modules/*"],
+      "@database/*": ["./src/commons/database/*"],
+    }
   },
   "include": [
     "src/**/*"
