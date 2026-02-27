@@ -5,7 +5,7 @@ import {
 import {Command, Type} from '@kawijsr/server-node';
 import {Service} from '../../commons/service';
 
-class HealthCheckService extends Service {
+class HealthCheckService {
 
   healthCheck() {
     return {
@@ -30,4 +30,4 @@ class HealthCheckService extends Service {
   }
 }
 
-export const healthCheckService = HealthCheckService.getInstance();
+export const healthCheckService = Service.getInstance(HealthCheckService);

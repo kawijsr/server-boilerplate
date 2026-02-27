@@ -1,17 +1,15 @@
-type Constructor<T> = Function & { prototype: T };
-
 export abstract class Service {
-  private static instances = new Map<Function, any>();
+  private static instances = new Map<string, any>();
 
   protected constructor() {}
 
-  public static getInstance<T extends Service>(this: Constructor<T>): T {
-    const ClassConstructor = this as any;
+  public static getInstance<T extends Service>(c: { new (): T}): T {
+    const instanceName = c.name;
 
-    if (!Service.instances.has(ClassConstructor)) {
-      Service.instances.set(ClassConstructor, new ClassConstructor());
+    if (!Service.instances.has(instanceName)) {
+      Service.instances.set(instanceName, new c());
     }
 
-    return Service.instances.get(ClassConstructor);
+    return Service.instances.get(instanceName);
   }
 }
