@@ -10,7 +10,7 @@ import {
 } from '@kawijsr/server-node';
 import {healthCheckService} from './health-check.service';
 
-@Routes('/api/')
+@Routes('/api')
 export class HealthCheckRoutes {
 
   @Route('get', '/')

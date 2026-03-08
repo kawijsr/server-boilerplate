@@ -6,16 +6,17 @@ import { engine } from 'express-handlebars';
 import { Application } from '@kawijsr/server-node';
 import { Configurations } from '@kawijsr/server-node/dist/commons/configurations';
 import {hbsHelpers} from './commons/handlebars/helpers';
+import { defaultErrorHandler } from './commons/log.handler';
 
 Application.build({ routes: require('./routes') })
-  .use(express.json())
-  .pipe((app) => {
-    if (Configurations.get('NODE_ENV') === 'local') {
-      app.use(cors());
-      app.use(express.static(path.join(__dirname, '.assets')))
-    } else {
+.use(express.json())
+.pipe((app) => {
+  if (Configurations.get('NODE_ENV') === 'local') {
+    app.use(cors());
+    app.use(express.static(path.join(__dirname, '.assets')))
+  } else {
 
-      app.use(
+    app.use(
         helmet({
           contentSecurityPolicy: {
             directives: {
@@ -38,8 +39,8 @@ Application.build({ routes: require('./routes') })
             },
           },
         }),
-      );
-    }
+    );
+  }
 
   app.engine('hbs', engine({
     defaultLayout: 'main',
@@ -53,6 +54,7 @@ Application.build({ routes: require('./routes') })
     app.enable('view cache');
   }
 })
-  .start(() => {
-    console.log(`Server started on port http://localhost:${Configurations.get('PORT')}`);
-  });
+.start((app) => {
+  app.use(defaultErrorHandler);
+  console.log(`Server started on port http://localhost:${Configurations.get('PORT')}`);
+});

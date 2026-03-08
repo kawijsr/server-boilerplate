@@ -3,14 +3,19 @@ import {
   PingDynamicCommandPost,
 } from './health-check.commands';
 import {Command, Type} from '@kawijsr/server-node';
-import {Service} from '../../commons/service';
+import * as packageJson from '../../../package.json';
+import { Service } from '../../commons/service';
+import { databaseService } from '../../commons/database/database.service';
 
 class HealthCheckService {
 
-  healthCheck() {
+  async healthCheck() {
+    const dbConnectionStatus: number = await databaseService.connectionCheck();
     return {
-      status: 'OK',
-    }
+      status: 'ok',
+      version: packageJson.version,
+      dbStatus: dbConnectionStatus ? 'active' : 'inactive',
+    };
   }
 
   ping() {
@@ -20,12 +25,12 @@ class HealthCheckService {
   }
 
   @Command()
-  pingDynamic(@Type(PingDynamicCommand) cmd: PingDynamicCommand) {
+  pingDynamic(@Type() cmd: PingDynamicCommand) {
     return cmd;
   }
 
   @Command()
-  pingDynamicPost(@Type(PingDynamicCommandPost) cmd: PingDynamicCommandPost) {
+  pingDynamicPost(@Type() cmd: PingDynamicCommandPost) {
     return 'Ping Dynamic Post';
   }
 }
