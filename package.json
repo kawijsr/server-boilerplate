@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run clean && tsc && ncp src/views/assets dist/.assets && ncp src/views dist/views && rm -r dist/views/assets && npm run tailwind && npm run version:assets",
     "clean": "rimraf dist",
-    "start:dev": "ncp src/views/assets src/.assets && concurrently --kill-others \"nodemon\" \"npm run tailwind:dev\"",
+    "start:dev": "ncp src/views/assets src/.assets && concurrently --kill-others \"nodemon\" \"browser-sync start --proxy 'localhost:4003' --files 'src/views/**/*.*' --reload-delay 1500 --port 4043\" \"npm run tailwind:dev\"",
     "start:prod": "node dist/main.js",
     "tailwind": "tailwindcss -i src/views/main.css -o dist/.assets/main.css --minify",
     "tailwind:dev": "tailwindcss -i src/views/main.css -o src/.assets/main.css --watch",
@@ -27,6 +27,7 @@
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/node": "^25.3.5",
+    "browser-sync": "^3.0.4",
     "concurrently": "^9.2.1",
     "ncp": "^2.0.0",
     "nodemon": "^3.1.14",
