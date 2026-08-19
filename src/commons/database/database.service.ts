@@ -45,7 +45,8 @@ Service.getInstance(DatabaseService).connection({
   },
   useNullAsDefault: true,
   postProcessResponse: (result: any, queryContext) => {
-    if (result && result.rows && typeof result.command === 'string') {
+    if (!result) return result;
+    if (result.rows && typeof result.command === 'string') {
       return result;
     }
     if (queryContext?.transform) {
