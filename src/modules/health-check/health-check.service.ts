@@ -2,7 +2,7 @@ import {
   PingDynamicCommand,
   PingDynamicCommandPost,
 } from './health-check.commands';
-import {Command, Type} from '@kawijsr/server-node';
+import {Arg, Command} from '@kawijsr/server-node';
 import * as packageJson from '../../../package.json';
 import { Service } from '../../commons/service';
 import { databaseService } from '../../commons/database/database.service';
@@ -25,12 +25,12 @@ class HealthCheckService {
   }
 
   @Command()
-  pingDynamic(@Type() cmd: PingDynamicCommand) {
+  pingDynamic(@Arg() cmd: PingDynamicCommand) {
     return cmd;
   }
 
   @Command()
-  pingDynamicPost(@Type() cmd: PingDynamicCommandPost) {
+  pingDynamicPost(@Arg() cmd: PingDynamicCommandPost) {
     return 'Ping Dynamic Post';
   }
 }
