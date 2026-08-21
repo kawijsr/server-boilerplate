@@ -4,12 +4,12 @@
   "description": "",
   "license": "MIT",
   "scripts": {
-    "build": "npm run clean && tsc && copyfiles -u 4 \"src/modules/mails/templates/**/*\" dist/modules/mails/templates && copyfiles -u 2 \"src/views/**/*.{js,ico,css}\" dist/.assets && copyfiles -u 2 \"src/views/**/*\" dist/views && rm -r dist/views/assets && npm run tailwind && npm run version:assets",
+    "build": "npm run clean && tsc && copyfiles -u 4 \"src/modules/mails/templates/**/*\" dist/modules/mails/templates && copyfiles -u 2 \"src/views/**/*.{js,ico,css,svg,png}\" dist/.assets && copyfiles -u 2 \"src/views/**/*\" dist/views && rm -r dist/views/assets && npm run tailwind && npm run version:assets",
     "clean": "rimraf dist",
     "clean:dev": "rimraf src/.assets",
     "start:dev": "npm run clean:dev && concurrently --kill-others \"npm run watch:assets\" \"nodemon\" \"npm run tailwind:dev\" \"browser-sync start --no-open --proxy 'localhost:4003' --files 'src/views/**/*.*' --reload-delay 1000 --port 4043\"",
     "start:prod": "node dist/main.js",
-    "watch:assets": "copyfiles -u 2 \"src/views/**/*.{js,ico}\" src/.assets && chokidar 'src/views/**/*' -c 'copyfiles -u 2 \"src/views/**/*.{js,ico}\" src/.assets'",
+    "watch:assets": "copyfiles -u 2 \"src/views/**/*.{js,ico,svg,png}\" src/.assets && chokidar 'src/views/**/*' -c 'copyfiles -u 2 \"src/views/**/*.{js,ico}\" src/.assets'",
     "tailwind": "tailwindcss -i src/views/main.css -o dist/.assets/main.css --minify",
     "tailwind:dev": "tailwindcss -i src/views/main.css -o src/.assets/main.css --watch",
     "version:assets": "node scripts/version-assets.js"
